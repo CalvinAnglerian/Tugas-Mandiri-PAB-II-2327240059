@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "673359492965",
+    "project_id": "spbu-app-35b40",
+    "storage_bucket": "spbu-app-35b40.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673359492965:android:56ef700f4a3669d45cd38c",
+        "android_client_info": {
+          "package_name": "com.example.spbu_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6HczW6_0zBRCrsv8JmCGSeGtUCbZ_Yl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
