@@ -75,12 +75,15 @@ class PostListItem extends StatelessWidget {
               post.address ?? '',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 12),
+
             ),
             const SizedBox(height: 4),
             Text(
               post.description ?? '',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 12),
             ),
             const SizedBox(height: 4),
             Text(

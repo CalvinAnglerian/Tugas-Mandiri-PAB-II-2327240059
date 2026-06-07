@@ -72,15 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: [
-          // IconButton(
-          //   onPressed: () {}, 
-          //   icon: const Icon(
-          //     Icons.search,
-          //     color: Color(0xFF64748B),
-          //     size: 28,
-          //   ),
-          // ),
-
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(

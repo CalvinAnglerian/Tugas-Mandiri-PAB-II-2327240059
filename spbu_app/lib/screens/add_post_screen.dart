@@ -31,15 +31,68 @@ class _AddPostScreenState extends State<AddPostScreen> {
   int _selectedIndex = 1;
 
   // Ambil Gambar
-  Future<void> pickImageAndConvert() async {
+  Future<void> pickImageAndConvert(ImageSource source) async {
     final picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await picker.pickImage(
+      source: source,
+      maxWidth: 1024,
+      maxHeight: 1024,
+      imageQuality: 70,
+    );
     if (image != null) {
       final bytes = await image.readAsBytes();
       setState(() {
         _base64Image = base64Encode(bytes);
       });
     }
+  }
+
+  // Dialog Pilihan Sumber Gambar (Kamera / Galeri)
+  void _showImageSourceDialog() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 12),
+              const Text(
+                'Pilih Sumber Foto',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              ListTile(
+                leading: const Icon(
+                  Icons.photo_library_outlined,
+                  color: Colors.blue,
+                ),
+                title: const Text('Galeri'),
+                onTap: () {
+                  Navigator.pop(context);
+                  pickImageAndConvert(ImageSource.gallery);
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.photo_camera_outlined,
+                  color: Colors.blue,
+                ),
+                title: const Text('Kamera'),
+                onTap: () {
+                  Navigator.pop(context);
+                  pickImageAndConvert(ImageSource.camera);
+                },
+              ),
+              const SizedBox(height: 12),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   // Ambil Lokasi dan Alamat
@@ -197,7 +250,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
         context,
       ).showSnackBar(const SnackBar(content: Text('Laporan berhasil dikirim')));
 
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
+      
     } catch (e) {
       ScaffoldMessenger.of(
         context,
@@ -345,7 +402,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton.icon(
-                      onPressed: pickImageAndConvert,
+                      onPressed: _showImageSourceDialog,
                       icon: const Icon(Icons.photo_camera_outlined),
                       label: const Text('Ambil Foto atau Unggah'),
                       style: OutlinedButton.styleFrom(
